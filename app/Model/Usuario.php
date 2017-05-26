@@ -13,14 +13,17 @@ class User extends Model implements
     AuthorizableContract
 {
     use Authenticatable, Authorizable;
-
+    
+    protected $table        = 'tb_usuario';
+    protected $primaryKey   = 'id_usuario';
+    
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name', 'email',
+        'id_usuario', 'nm_email_usuario', 'nm_senha_usuario', 'ic_status_usuario', 'id_endereco'
     ];
 
     /**
@@ -28,7 +31,7 @@ class User extends Model implements
      *
      * @var array
      */
-    protected $hidden = [
-        'password',
+    protected $dates = [
+        'created_at', 'updated_at'
     ];
 }
