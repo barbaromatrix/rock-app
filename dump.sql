@@ -54,7 +54,7 @@ CREATE TABLE `tb_cidade` (
   PRIMARY KEY (`id_cidade`),
   KEY `tb_cidade_id_estado_foreign` (`id_estado`),
   CONSTRAINT `tb_cidade_id_estado_foreign` FOREIGN KEY (`id_estado`) REFERENCES `tb_estado` (`id_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -63,7 +63,7 @@ CREATE TABLE `tb_cidade` (
 
 LOCK TABLES `tb_cidade` WRITE;
 /*!40000 ALTER TABLE `tb_cidade` DISABLE KEYS */;
-INSERT INTO `tb_cidade` VALUES (1,'Acrelândia',1,NULL,NULL);
+INSERT INTO `tb_cidade` VALUES (1,'Acrelândia',1,NULL,NULL),(2,'Acrelândia',1,NULL,NULL);
 /*!40000 ALTER TABLE `tb_cidade` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -78,15 +78,15 @@ CREATE TABLE `tb_doacao` (
   `id_doacao` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `dt_doacao` date NOT NULL,
   `id_usuario_doador` int(10) unsigned NOT NULL,
-  `id_usuario` int(10) unsigned NOT NULL,
+  `id_usuario` int(10) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `ic_disponivel` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id_doacao`),
   KEY `tb_doacao_id_usuario_doador_foreign` (`id_usuario_doador`),
   KEY `tb_doacao_id_usuario_foreign` (`id_usuario`),
-  CONSTRAINT `tb_doacao_id_usuario_foreign` FOREIGN KEY (`id_usuario`) REFERENCES `tb_usuario` (`id_usuario`),
   CONSTRAINT `tb_doacao_id_usuario_doador_foreign` FOREIGN KEY (`id_usuario_doador`) REFERENCES `tb_usuario` (`id_usuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -95,6 +95,7 @@ CREATE TABLE `tb_doacao` (
 
 LOCK TABLES `tb_doacao` WRITE;
 /*!40000 ALTER TABLE `tb_doacao` DISABLE KEYS */;
+INSERT INTO `tb_doacao` VALUES (1,'2017-05-27',1,NULL,NULL,'2017-05-28 14:09:54',1);
 /*!40000 ALTER TABLE `tb_doacao` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,8 +115,8 @@ CREATE TABLE `tb_doacao_produto` (
   PRIMARY KEY (`id_doacao_produto`),
   KEY `tb_doacao_produto_id_doacao_foreign` (`id_doacao`),
   KEY `tb_doacao_produto_id_produto_foreign` (`id_produto`),
-  CONSTRAINT `tb_doacao_produto_id_produto_foreign` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id_produto`),
-  CONSTRAINT `tb_doacao_produto_id_doacao_foreign` FOREIGN KEY (`id_doacao`) REFERENCES `tb_doacao` (`id_doacao`)
+  CONSTRAINT `tb_doacao_produto_id_doacao_foreign` FOREIGN KEY (`id_doacao`) REFERENCES `tb_doacao` (`id_doacao`),
+  CONSTRAINT `tb_doacao_produto_id_produto_foreign` FOREIGN KEY (`id_produto`) REFERENCES `tb_produto` (`id_produto`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -147,7 +148,7 @@ CREATE TABLE `tb_endereco` (
   PRIMARY KEY (`id_endereco`),
   KEY `tb_endereco_id_cidade_foreign` (`id_cidade`),
   CONSTRAINT `tb_endereco_id_cidade_foreign` FOREIGN KEY (`id_cidade`) REFERENCES `tb_cidade` (`id_cidade`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -156,6 +157,7 @@ CREATE TABLE `tb_endereco` (
 
 LOCK TABLES `tb_endereco` WRITE;
 /*!40000 ALTER TABLE `tb_endereco` DISABLE KEYS */;
+INSERT INTO `tb_endereco` VALUES (1,'Rua do Acre',1,'','AcreBairro',1,NULL,NULL);
 /*!40000 ALTER TABLE `tb_endereco` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -172,7 +174,7 @@ CREATE TABLE `tb_estado` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id_estado`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,7 +183,7 @@ CREATE TABLE `tb_estado` (
 
 LOCK TABLES `tb_estado` WRITE;
 /*!40000 ALTER TABLE `tb_estado` DISABLE KEYS */;
-INSERT INTO `tb_estado` VALUES (1,'Acre',NULL,NULL);
+INSERT INTO `tb_estado` VALUES (1,'Acre',NULL,NULL),(2,'Acre',NULL,NULL);
 /*!40000 ALTER TABLE `tb_estado` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -258,7 +260,7 @@ CREATE TABLE `tb_usuario` (
   PRIMARY KEY (`id_usuario`),
   KEY `tb_usuario_id_endereco_foreign` (`id_endereco`),
   CONSTRAINT `tb_usuario_id_endereco_foreign` FOREIGN KEY (`id_endereco`) REFERENCES `tb_endereco` (`id_endereco`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,6 +269,7 @@ CREATE TABLE `tb_usuario` (
 
 LOCK TABLES `tb_usuario` WRITE;
 /*!40000 ALTER TABLE `tb_usuario` DISABLE KEYS */;
+INSERT INTO `tb_usuario` VALUES (1,'Matheus Galdino','matheus.galdino@hotmail.com','123456',1,1,NULL,NULL);
 /*!40000 ALTER TABLE `tb_usuario` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -279,4 +282,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-19 19:25:56
+-- Dump completed on 2017-05-28 14:25:43
