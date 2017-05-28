@@ -18,7 +18,6 @@ class Doacao extends Model
 
     /**
      * The attributes excluded from the model's JSON form.
-     *
      * @var array
      */
     public $dates = [
