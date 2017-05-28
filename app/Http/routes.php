@@ -1,18 +1,8 @@
 <?php
-use Illuminate\Http\Request;
 
-
-$app->group(['prefix' => '/api'], function() use ($app) {
-    $app->group(['prefix'   =>  '/usuario'], function() use ($app){
-        
-    });
-    
-    $app->group(['prefix'   =>  '/produto'], function() use ($app){
-        
-    });
-    
-    $app->group(['prefix'   =>  '/doacao'], function() use ($app){
-        
-    });
-    
+$app->get('/', function() use($app){
+    return $app->version();
 });
+
+$app->get('doacao[/]', 'DoacaoController@index');
+$app->put('doacao/{id_doacao}', 'DoacaoController@update');
