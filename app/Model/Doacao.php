@@ -26,4 +26,8 @@ class Doacao extends Model
     ];
     
     
+    public static function getDoacoes()
+    {
+        return self::where(['ic_disponivel' => '1', 'id_usuario' => null])->orderby('updated_at', 'desc')->get();
+    }
 }
