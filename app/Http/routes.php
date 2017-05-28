@@ -15,7 +15,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
-Route::group(['prefix' => 'doacao'], function(){
-    Route::get('/', 'DoacaoController@index');
+Route::group(['middleware' => 'cors'], function(){
+   Route::group(['prefix' => 'doacao'], function(){
+        Route::get('/', 'DoacaoController@index');
+    }); 
 });
