@@ -18,6 +18,7 @@ class Doacao extends Model
 
     /**
      * The attributes excluded from the model's JSON form.
+     *
      * @var array
      */
     public $dates = [
@@ -25,18 +26,4 @@ class Doacao extends Model
     ];
     
     
-    public static function getDoacoes()
-    {
-        return self::where(['id_usuario' => null, 'ic_disponivel' => true])->orderBy('created_at')->get();
-    }
-    
-    
-    public static function updateDoacao(Doacao $doacao, $dados)
-    {   
-        foreach($dados as $key => $value) {
-            $doacao->$key = $value;
-        }
-        
-        return $doacao->save();
-    }
 }
