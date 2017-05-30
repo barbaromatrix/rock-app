@@ -24,4 +24,14 @@ class DoacaoProduto extends Model
     protected $dates = [
         'created_at', 'updated_at'
     ];
+    
+    public function produto()
+    {
+        return $this->hasOne('App\Model\Produto', 'id_produto', 'id_produto');
+    }
+    
+    public function doacao()
+    {
+        return $this->hasOne('App\Model\Doacao', 'id_doacao', 'id_doacao');
+    }
 }

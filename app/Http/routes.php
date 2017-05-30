@@ -18,5 +18,7 @@ Route::get('/', function () {
 Route::group(['middleware' => 'cors'], function(){
    Route::group(['prefix' => 'doacao'], function(){
         Route::get('/', 'DoacaoController@index');
-    }); 
+    });
+    
+    Route::put('/{id_doacao}', 'DoacaoController@update');
 });
